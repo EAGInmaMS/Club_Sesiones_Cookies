@@ -15,61 +15,67 @@
 </head>
 <body>
     <?php
+        require_once("funciones.php");
+        session_start();
         if(isset($_COOKIE['sesion'])){
-            require_once("funciones.php");
-            list($usu,$nom)=comprobar_sesion();
-            if($usu==='a'){
-                $conexion=conectarservidor();
-                echo imprimir_menu();
-                echo "<h1>INSERTAR NOTICIA</h1>";
-                echo btn_volver('noticias.php','volverinser');
-                $num=obtener_id("'noticia'");
-                echo "<form class='formsinsertmod' method='post' action='noticias.php' enctype='multipart/form-data'>
-                    <div class='fila1'>
-                    <label for='titulo'>Titulo de la noticia:</label>
-                    <input name='titulo' type='text'>
-                    </div>
-                    <div class='fila1'>
-                    <label for=imgnoti>Imagen de la noticia:</label>
-                    <input name='imgnoti' type='file'>
-                    </div>
-                    <div class='fila1'>
-                    <label for='fecha'>Fecha de publicacion:</label>
-                    <input name='fecha' type='date'>
-                    </div>
-                    <div>
-                    <textarea name='contenido' cols='45' rows='15' placeholder='Inserte aquí el contenido de la noticia'></textarea>
-                    </div>
-                    <input name='insernoti' type='submit'>
-                </form>";
-
-                if(isset($_POST['insernoti'])){
-                    $formato=$_FILES['imgnoti']['type'];
-                    if(comprobar_img($formato)){
-                        $titulo=$_POST['titulo'];
-                        $contenido=$_POST['contenido'];
-                        $fecha_publi=$_POST['fecha'];
-                        $nomfoto=$_FILES['imgnoti']['name'];
-                        $temp=$_FILES['imgnoti']['tmp_name'];
-                        $ruta="../img/$nomfoto";
-                        move_uploaded_file($temp,$ruta);
-                        $id='';
-                        $insernoti=$conexion->prepare("insert into noticia values(?,?,?,?,?)");
-                        $insernoti->bind_param("issss",$id,$titulo,$contenido,$ruta,$fecha_publi);
-                        $insernoti->execute();
-                        $insernoti->close();
-                        echo "<p>datos insertados correctamente</p>";
-                    }else{
-                        echo "<p>imagen no válida</p>";
-                    }
-                }
-            }else{
-                echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=../index.php'>";
-            }
-            
+            list($usu,$nom)=comprobar_sesion('c');
+        }else if(isset($_SESSION['tipo'])){
+            list($usu,$nom)=comprobar_sesion('s');
         }else{
-            echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=../index.php'>";
+            $usu='n';
+            echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+            echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
         }
+        if($usu==='a'){
+            $conexion=conectarservidor();
+            echo imprimir_menu($usu,$nom);
+            echo "<h1>INSERTAR NOTICIA</h1>";
+            echo btn_volver('noticias.php','volverinser');
+            $num=obtener_id("'noticia'");
+            echo "<form class='formsinsertmod' method='post' action='noticias.php' enctype='multipart/form-data'>
+                <div class='fila1'>
+                <label for='titulo'>Titulo de la noticia:</label>
+                <input name='titulo' type='text'>
+                </div>
+                <div class='fila1'>
+                <label for=imgnoti>Imagen de la noticia:</label>
+                <input name='imgnoti' type='file'>
+                </div>
+                <div class='fila1'>
+                <label for='fecha'>Fecha de publicacion:</label>
+                <input name='fecha' type='date'>
+                </div>
+                <div>
+                <textarea name='contenido' cols='45' rows='15' placeholder='Inserte aquí el contenido de la noticia'></textarea>
+                </div>
+                <input name='insernoti' type='submit'>
+            </form>";
+
+            if(isset($_POST['insernoti'])){
+                $formato=$_FILES['imgnoti']['type'];
+                if(comprobar_img($formato)){
+                    $titulo=$_POST['titulo'];
+                    $contenido=$_POST['contenido'];
+                    $fecha_publi=$_POST['fecha'];
+                    $nomfoto=$_FILES['imgnoti']['name'];
+                    $temp=$_FILES['imgnoti']['tmp_name'];
+                    $ruta="../img/$nomfoto";
+                    move_uploaded_file($temp,$ruta);
+                    $id='';
+                    $insernoti=$conexion->prepare("insert into noticia values(?,?,?,?,?)");
+                    $insernoti->bind_param("issss",$id,$titulo,$contenido,$ruta,$fecha_publi);
+                    $insernoti->execute();
+                    $insernoti->close();
+                    echo "<p>datos insertados correctamente</p>";
+                }else{
+                    echo "<p>imagen no válida</p>";
+                }
+            }
+        }else{
+            echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+            echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
+        }
+            
         
 
     ?>

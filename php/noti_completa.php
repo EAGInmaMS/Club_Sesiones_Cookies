@@ -16,9 +16,21 @@
 <body>
     <?php
         require_once("funciones.php");
-        echo imprimir_menu();
+        session_start();
+        if(isset($_COOKIE['sesion'])){
+            list($usu,$nom)=comprobar_sesion('c');
+        }else if(isset($_SESSION['tipo'])){
+            list($usu,$nom)=comprobar_sesion('s');
+        }else{
+            $usu='n';
+            $nom='';
+        }
+        $conexion=conectarservidor();
+        echo imprimir_menu($usu,$nom);
         echo "<main>";
-        echo btn_volver('noticias.php','volverinser');
+        if($usu==='a'){
+            echo btn_volver('noticias.php','volverinser');
+        }
         echo "<article id='noticompleta'>";
         if(isset($_GET['completa'])){
             $id_noti=$_GET['completa'];

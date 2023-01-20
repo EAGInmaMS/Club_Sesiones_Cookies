@@ -13,78 +13,84 @@
 </head>
 <body id='bodynoti'>
     <?php
+        require_once("funciones.php");
+        session_start();
         if(isset($_COOKIE['sesion'])){
-            require_once("funciones.php");
-            list($usu,$nom)=comprobar_sesion();
-            if($usu==='a'){
-                $conexion=conectarservidor();
-                echo imprimir_menu();
-                echo "<main id='mainnoti'>";
-                echo "<h1>NOTICIAS</h1>";
-                echo "<div class='inser'>";
-                echo btn_inser('inser_noti.php','NOTICIA');
-                echo "</div>";
-
-                // Primero establecemos el número de noticias que va a aparecer por página
-                $notispag=4;
-                $pagina=1;
-                if(isset($_GET["pagina"])){
-                    $pagina=$_GET["pagina"];
-                }
-                // Establecemos el limit y el offset para después realizar la consulta
-                $limit=$notispag;
-                $offset=($pagina-1)*$notispag;
-                $totalpags=$conexion->query("select count(*) as conteo from noticia");
-                // Y sacamos el número de noticias que hay en la base de datos
-                while($num=$totalpags->fetch_array(MYSQLI_ASSOC)){
-                    $numnotis=$num['conteo'];
-                }
-                if($numnotis==0){
-                    echo "<p>No hay ninguna noticia</p>";
-                }else{
-                    // Redondeamos para que salga el numero de páginas que van a aparecer
-                    $pags=ceil($numnotis/$notispag);
-                    $info=$conexion->prepare("select * from noticia order by fecha_publicacion desc limit ? offset ?");
-                    $info->bind_param("ii",$limit,$offset);
-                    $info->bind_result($id,$titulo,$contenido,$imagen,$fecha);
-                    $info->execute();
-                    echo "<div id='contenidonoti'>";
-                    echo "<section id='contnoticias'>";
-                    while($info->fetch()){
-                            $contenido=substr($contenido,0,100);
-                            echo "<article>";
-                            echo "<img src=\"$imagen\">";
-                            echo "<p>$titulo</p>";
-                            $fechac=convertir_fecha($fecha);
-                            echo "<p>$fechac</p>";
-                            echo "<p>$contenido</p>";
-                            echo "<a method='get' href='noti_completa.php?completa=$id'>VER MÁS</a>";
-
-                            echo "</article>";
-                    }
-                    $info->close();
-                    echo "</section> </div>";
-
-                    echo "<div id='pagnoti'><p>Página $pagina de $pags</p></div>";
-
-                    echo "<ul class='listapags'>";
-                    for($x=1;$x<=$pags;$x++){
-                        // Si la página es igual al valor de x le ponemos la clase 'active' al li para saber qué pagina estamos mostrando
-                        if($x==$pagina){
-                            echo "<li class='active'><a href='./noticias.php?pagina=$x'>$x</a></li>";
-                        }else{
-                            echo "<li><a href='./noticias.php?pagina=$x'>$x</a></li>";
-                        }
-                    }
-                    echo "</ul>";
-                    }
-                    echo"</main>";
-                    echo imprimir_footer();
-            }else{
-                echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=../index.php'>";
-            }
+            list($usu,$nom)=comprobar_sesion('c');
+        }else if(isset($_SESSION['tipo'])){
+            list($usu,$nom)=comprobar_sesion('s');
         }else{
-            echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=../index.php'>";
+            $usu='n';
+            echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+            echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
+        }
+        if($usu==='a'){
+            $conexion=conectarservidor();
+            echo imprimir_menu($usu,$nom);
+            echo "<main id='mainnoti'>";
+            echo "<h1>NOTICIAS</h1>";
+            echo "<div class='inser'>";
+            echo btn_inser('inser_noti.php','NOTICIA');
+            echo "</div>";
+
+            // Primero establecemos el número de noticias que va a aparecer por página
+            $notispag=4;
+            $pagina=1;
+            if(isset($_GET["pagina"])){
+                $pagina=$_GET["pagina"];
+            }
+            // Establecemos el limit y el offset para después realizar la consulta
+            $limit=$notispag;
+            $offset=($pagina-1)*$notispag;
+            $totalpags=$conexion->query("select count(*) as conteo from noticia");
+            // Y sacamos el número de noticias que hay en la base de datos
+            while($num=$totalpags->fetch_array(MYSQLI_ASSOC)){
+                $numnotis=$num['conteo'];
+            }
+            if($numnotis==0){
+                echo "<p>No hay ninguna noticia</p>";
+            }else{
+                // Redondeamos para que salga el numero de páginas que van a aparecer
+                $pags=ceil($numnotis/$notispag);
+                $info=$conexion->prepare("select * from noticia order by fecha_publicacion desc limit ? offset ?");
+                $info->bind_param("ii",$limit,$offset);
+                $info->bind_result($id,$titulo,$contenido,$imagen,$fecha);
+                $info->execute();
+                echo "<div id='contenidonoti'>";
+                echo "<section id='contnoticias'>";
+                while($info->fetch()){
+                        $contenido=substr($contenido,0,100);
+                        echo "<article>";
+                        echo "<img src=\"$imagen\">";
+                        echo "<p>$titulo</p>";
+                        $fechac=convertir_fecha($fecha);
+                        echo "<p>$fechac</p>";
+                        echo "<p>$contenido</p>";
+                        echo "<a method='get' href='noti_completa.php?completa=$id'>VER MÁS</a>";
+
+                        echo "</article>";
+                }
+                $info->close();
+                echo "</section> </div>";
+
+                echo "<div id='pagnoti'><p>Página $pagina de $pags</p></div>";
+
+                echo "<ul class='listapags'>";
+                for($x=1;$x<=$pags;$x++){
+                    // Si la página es igual al valor de x le ponemos la clase 'active' al li para saber qué pagina estamos mostrando
+                    if($x==$pagina){
+                        echo "<li class='active'><a href='./noticias.php?pagina=$x'>$x</a></li>";
+                    }else{
+                        echo "<li><a href='./noticias.php?pagina=$x'>$x</a></li>";
+                    }
+                }
+                echo "</ul>";
+                }
+                echo"</main>";
+                echo imprimir_footer();
+        }else{
+            echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+            echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
         }
         
         

@@ -17,16 +17,14 @@
     require_once("funciones.php");
     session_start();
     if(isset($_COOKIE['sesion'])){
-        session_decode($_COOKIE['sesion']);
-        $usu=$_SESSION['tipo'];
-        if($usu==='a'){
-            $nom='Administrador';
-        }else{
-            $nom=$_SESSION['usuario'];
-        }
+        list($usu,$nom)=comprobar_sesion('c');
+    }else if(isset($_SESSION['tipo'])){
+        list($usu,$nom)=comprobar_sesion('s');
     }else{
-        $nom='';
         $usu='n';
+        $nom='';
+        echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+        echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
     }
     echo imprimir_menu($usu,$nom);
     $conexion=conectarservidor();

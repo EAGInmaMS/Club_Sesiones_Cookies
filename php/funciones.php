@@ -40,7 +40,7 @@
                             $cabecera.="<a href='citas.php'>Mis Citas</a>";
                         }else{
                             $cabecera.="<a href='citas.php'>Citas</a>
-                                        <a href='noticias.php>Noticias</a>
+                                        <a href='noticias.php'>Noticias</a>
                                         <a href='testimonios.php'>Testimonios</a>";
                         }
                         $cabecera.="<a href='formacceso.php?cerrar=s'>Cerrar Sesion de $n</a>
@@ -98,15 +98,12 @@
             return $pie;
         }
 
-        function comprobar_sesion(){
-            session_start();
-            session_decode($_COOKIE['sesion']);
+        function comprobar_sesion($t){
+            if($t==='c'){
+                session_decode($_COOKIE['sesion']);
+            }
                 $usu=$_SESSION['tipo'];
-                if($usu==='a'){
-                    $nom='Administrador';
-                }else{
-                    $nom=$_SESSION['usuario'];
-                }
+                $nom=$_SESSION['usuario'];
             return [$usu,$nom];
         }
 

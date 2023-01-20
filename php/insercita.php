@@ -13,79 +13,85 @@
 </head>
 <body>
     <?php
-        if(isset($_COOKIE['sesion'])){
-            require_once("funciones.php");
-            list($usu,$nom)=comprobar_sesion();
-            if($usu==='a'){
-                $conexion=conectarservidor();
-                echo imprimir_menu('a','Administrador');
-                echo "<h1>CREAR CITA</h1>";
-                echo btn_volver('citas.php','volverinser');
-                $socios=consultar_datos('socio');
-                $servicios=consultar_datos('servicio');
-                echo "<form class='formsinsertmod' method='post' action='#' enctype='multipart/form-data'>
-                    <div class='centrar'>
-                        <div class='columna1'>
-                            <div>
-                                <label for='sociocita'>Socio:</label>
-                                <select name='sociocita' for='sociocita'>";
-                                while($opt=$socios->fetch_array(MYSQLI_ASSOC)){
-                                    if($opt['Id']>0){
-                                        echo "<option value=$opt[Id]>$opt[Nombre]</option>";
-                                    }
-                                }
-                                echo "</select>
-                            </div>
-                            <div>
-                                <label for='fechacita'>Fecha:</label>
-                                <input type='date' name='fechacita'>
-                            </div>
-                        </div>
-                        <div class='columna2'>
-                            <div>
-                                <label for='servcita'>Servicio:</label>
-                                <select name='servcita' for='servcita'>";
-                                while($opcion=$servicios->fetch_array(MYSQLI_ASSOC)){
-                                    echo "<option value=$opcion[Id]>$opcion[Descripcion]</option>";
-                                }
-                                echo "</select>
-                            </div>
-                            <div>
-                                <label for='horacita'>Hora:</label>
-                                <input type='time' name='horacita'>
-                            </div>
-                        </div>
+    require_once("funciones.php");
+    session_start();
+    if(isset($_COOKIE['sesion'])){
+        list($usu,$nom)=comprobar_sesion('c');
+    }else if(isset($_SESSION['tipo'])){
+        list($usu,$nom)=comprobar_sesion('s');
+    }else{
+        $usu='n';
+        echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+        echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
+    }
+    if($usu==='a'){
+        $conexion=conectarservidor();
+        echo imprimir_menu('a','Administrador');
+        echo "<h1>CREAR CITA</h1>";
+        echo btn_volver('citas.php','volverinser');
+        $socios=consultar_datos('socio');
+        $servicios=consultar_datos('servicio');
+        echo "<form class='formsinsertmod' method='post' action='#' enctype='multipart/form-data'>
+            <div class='centrar'>
+                <div class='columna1'>
+                    <div>
+                        <label for='sociocita'>Socio:</label>
+                        <select name='sociocita' for='sociocita'>";
+                        while($opt=$socios->fetch_array(MYSQLI_ASSOC)){
+                            if($opt['Id']>0){
+                                echo "<option value=$opt[Id]>$opt[Nombre]</option>";
+                            }
+                        }
+                        echo "</select>
                     </div>
-                    <input type='submit' name='insercita'>
-                </form>";
+                    <div>
+                        <label for='fechacita'>Fecha:</label>
+                        <input type='date' name='fechacita'>
+                    </div>
+                </div>
+                <div class='columna2'>
+                    <div>
+                        <label for='servcita'>Servicio:</label>
+                        <select name='servcita' for='servcita'>";
+                        while($opcion=$servicios->fetch_array(MYSQLI_ASSOC)){
+                            echo "<option value=$opcion[Id]>$opcion[Descripcion]</option>";
+                        }
+                        echo "</select>
+                    </div>
+                    <div>
+                        <label for='horacita'>Hora:</label>
+                        <input type='time' name='horacita'>
+                    </div>
+                </div>
+            </div>
+            <input type='submit' name='insercita'>
+        </form>";
 
-                if(isset($_POST['insercita'])){
-                    $socio=$_POST['sociocita'];
-                    $servicio=$_POST['servcita'];
-                    $fecha=$_POST['fechacita'];
-                    $hora=$_POST['horacita'];
-                    $comprobacion=$conexion->prepare("select * from citas where socio=? and fecha=? and hora=?");
-                    $comprobacion->bind_result($so,$se,$fe,$ho);
-                    $comprobacion->bind_param("iss",$socio,$fecha,$hora);
-                    $comprobacion->execute();
-                    $comprobacion->store_result();
-                    if($comprobacion->num_rows>0){
-                        echo "<p class='mnsmod'>Cita ya programada</p>";
-                    }else{
-                        $insertcita=$conexion->prepare("insert into citas values(?,?,?,?)");
-                        $insertcita->bind_param("iiss",$socio,$servicio,$fecha,$hora);
-                        $insertcita->execute();
-                        $insertcita->close();
-                        echo "<p class='mnsmod'>Datos insertados correctamente</p>";
-                        echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=citas.php'>";
-                    }
-                }
+        if(isset($_POST['insercita'])){
+            $socio=$_POST['sociocita'];
+            $servicio=$_POST['servcita'];
+            $fecha=$_POST['fechacita'];
+            $hora=$_POST['horacita'];
+            $comprobacion=$conexion->prepare("select * from citas where socio=? and fecha=? and hora=?");
+            $comprobacion->bind_result($so,$se,$fe,$ho);
+            $comprobacion->bind_param("iss",$socio,$fecha,$hora);
+            $comprobacion->execute();
+            $comprobacion->store_result();
+            if($comprobacion->num_rows>0){
+                echo "<p class='mnsmod'>Cita ya programada</p>";
             }else{
-                echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=../index.php'>";
+                $insertcita=$conexion->prepare("insert into citas values(?,?,?,?)");
+                $insertcita->bind_param("iiss",$socio,$servicio,$fecha,$hora);
+                $insertcita->execute();
+                $insertcita->close();
+                echo "<p class='mnsmod'>Datos insertados correctamente</p>";
+                echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=citas.php'>";
             }
-        }else{
-            echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=../index.php'>";
         }
+    }else{
+        echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+        echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
+    }
         
         
     ?>

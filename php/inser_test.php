@@ -13,62 +13,70 @@
 </head>
 <body>
     <?php
+        require_once("funciones.php");
+        session_start();
         if(isset($_COOKIE['sesion'])){
-            require_once("funciones.php");
-            list($usu,$nom)=comprobar_sesion();
-            if($usu==='a'){
-                $conexion=conectarservidor();
-                echo imprimir_menu($usu,$nom);
-                echo "<h1>INSERTAR TESTIMONIO</h1>";
-                echo btn_volver('testimonios.php','volverinser');
-                $num=obtener_id("'testimonio'");
-                $socio=consultar_datos("socio");
-                echo "<form class='formsinsertmod' method='post' action='#' enctype='multipart/form-data'>
-                        <div class='fila1'>
-                            <label for='idtesti'>ID:</label>
-                            <input name='idtesti' value=$num disabled type='number'>
-                        </div>
-                        <div id='autorfecha'>
-                            <div>
-                                <label for='autortesti'>Autor:</label>
-                                <select name='autortesti' for='autortesti'>";
-                                    while($opt=$socio->fetch_array(MYSQLI_ASSOC)){
-                                        if($opt['Id']>0){
-                                            echo "<option value=$opt[Id]>$opt[Nombre]</option>";
-                                        }
-                                    }
-                                echo "</select>
-                            </div>
-                        </div>
-                        <div class='mensaje'>
-                            <textarea name='contentesti' id='contenidotestimonio' cols='30' row='10' placeholder='Escribe aquí tu testimonio'></textarea>
-                        </div>
-                        <input type='submit' name='insertesti'>
-                    </form>";
-
-                    if(isset($_POST['insertesti'])){
-                        $id='';
-                        $autor=$_POST['autortesti'];
-                        $contenido=$_POST['contentesti'];
-                        $fecha=date('Y-m-d',time());
-                        // No dejo que gaurden testimonios con una fecha futura porque no tendría mucho sentido
-                            $inser=$conexion->prepare("insert into testimonio values(?,?,?,?)");
-                            $inser->bind_param("iiss",$id,$autor,$contenido,$fecha);
-                            $inser->execute();
-                            $inser->close();
-                            $inser="<p class='mnsmod'>Datos insertados correctamente</p>";
-                
-                        echo $inser;
-                        echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=testimonios.php'>";
-                    }
-
-                    $conexion->close();
-            }else{
-                echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=../index.php'>";
-            }
+            list($usu,$nom)=comprobar_sesion('c');
+        }else if(isset($_SESSION['tipo'])){
+            list($usu,$nom)=comprobar_sesion('s');
         }else{
-            echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=../index.php'>";
+            $usu='n';
+            echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+            echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
         }
+
+        if($usu==='a'){
+            $conexion=conectarservidor();
+            echo imprimir_menu($usu,$nom);
+            echo "<h1>INSERTAR TESTIMONIO</h1>";
+            echo btn_volver('testimonios.php','volverinser');
+            $num=obtener_id("'testimonio'");
+            $socio=consultar_datos("socio");
+            echo "<form class='formsinsertmod' method='post' action='#' enctype='multipart/form-data'>
+                    <div class='fila1'>
+                        <label for='idtesti'>ID:</label>
+                        <input name='idtesti' value=$num disabled type='number'>
+                    </div>
+                    <div id='autorfecha'>
+                        <div>
+                            <label for='autortesti'>Autor:</label>
+                            <select name='autortesti' for='autortesti'>";
+                                while($opt=$socio->fetch_array(MYSQLI_ASSOC)){
+                                    if($opt['Id']>0){
+                                        echo "<option value=$opt[Id]>$opt[Nombre]</option>";
+                                    }
+                                }
+                            echo "</select>
+                        </div>
+                    </div>
+                    <div class='mensaje'>
+                        <textarea name='contentesti' id='contenidotestimonio' cols='30' row='10' placeholder='Escribe aquí tu testimonio'></textarea>
+                    </div>
+                    <input type='submit' name='insertesti'>
+                </form>";
+
+                if(isset($_POST['insertesti'])){
+                    $id='';
+                    $autor=$_POST['autortesti'];
+                    $contenido=$_POST['contentesti'];
+                    $fecha=date('Y-m-d',time());
+                    // No dejo que gaurden testimonios con una fecha futura porque no tendría mucho sentido
+                        $inser=$conexion->prepare("insert into testimonio values(?,?,?,?)");
+                        $inser->bind_param("iiss",$id,$autor,$contenido,$fecha);
+                        $inser->execute();
+                        $inser->close();
+                        $inser="<p class='mnsmod'>Datos insertados correctamente</p>";
+            
+                    echo $inser;
+                    echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=testimonios.php'>";
+                }
+
+                $conexion->close();
+        }else{
+            echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+            echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
+        }
+        
         
     ?>
 </body>

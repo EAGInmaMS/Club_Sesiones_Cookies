@@ -13,58 +13,65 @@
 </head>
 <body>
     <?php
+        require_once("funciones.php");
+        session_start();
         if(isset($_COOKIE['sesion'])){
-            require_once("funciones.php");
-            $conexion=conectarservidor();
-            list($usu,$nom)=comprobar_sesion();
-            if($usu==='a'){
-                echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=../index.php'>";
-            }else{
-                $nom=$_SESSION['usuario'];
-                $cabecera=imprimir_menu($usu,$nom);
-                echo $cabecera;
-                echo "<h1>Datos Personales</h1>";
-                $datossocio=$conexion->prepare("select nombre,edad,telefono,foto from socio where usuario=?");
-                $datossocio->bind_param("s",$nom);
-                $datossocio->bind_result($nombre,$edad,$telefono,$foto);
-                $datossocio->execute();
-                $datossocio->store_result();
-                while($datossocio->fetch()){
-                    echo "<article class='datossocio'>
-                        <div class='fila1'>
-                            <img src=$foto>
-                        </div>
-                        <div class='centrar'>
-                            <div class='columna1'>
-                                <div>
-                                    <p>Nombre: $nombre</p>
-                                </div>
-                                <div>
-                                    <p>Usuario: $nom</p>
-                                </div>
-                            </div>
-                            <div class='columna2'>
-                                <div>
-                                    <p>Edad: $edad</p>
-                                </div>
-                                <div>
-                                    <p>Contraseña: *********</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <p>Telefono: $telefono</p>
-                        </div>
-                    </article>";
-                }
-
-                echo "<div class='moddatos'>
-                <a href='mod_socio.php'>EDITAR DATOS</a>
-                </div>";
-            }
-            $conexion->close(); 
+            list($usu,$nom)=comprobar_sesion('c');
+        }else if(isset($_SESSION['tipo'])){
+            list($usu,$nom)=comprobar_sesion('s');
         }else{
-            echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=../index.php'>";
+            $usu='n';
+        }
+
+        if($usu==='s'){
+            $conexion=conectarservidor();
+            $nom=$_SESSION['usuario'];
+            $cabecera=imprimir_menu($usu,$nom);
+            echo $cabecera;
+            echo "<h1>Datos Personales</h1>";
+            $datossocio=$conexion->prepare("select nombre,edad,telefono,foto from socio where usuario=?");
+            $datossocio->bind_param("s",$nom);
+            $datossocio->bind_result($nombre,$edad,$telefono,$foto);
+            $datossocio->execute();
+            $datossocio->store_result();
+            while($datossocio->fetch()){
+                echo "<article class='datossocio'>
+                    <div class='fila1'>
+                        <img src=$foto>
+                    </div>
+                    <div class='centrar'>
+                        <div class='columna1'>
+                            <div>
+                                <p>Nombre: $nombre</p>
+                            </div>
+                            <div>
+                                <p>Usuario: $nom</p>
+                            </div>
+                        </div>
+                        <div class='columna2'>
+                            <div>
+                                <p>Edad: $edad</p>
+                            </div>
+                            <div>
+                                <p>Contraseña: *********</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Telefono: $telefono</p>
+                    </div>
+                </article>";
+            }
+
+            echo "<div class='moddatos'>
+            <a href='mod_socio.php'>EDITAR DATOS</a>
+            </div>";
+            $conexion->close();
+        }else if($usu==='a'){
+            echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+            echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
+        }else{
+            echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=formacceso.php'>";
         }
     ?>
 </body>

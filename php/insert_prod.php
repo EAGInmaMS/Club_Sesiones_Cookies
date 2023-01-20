@@ -14,61 +14,67 @@
 </head>
 <body>
     <?php
-        if(isset($_COOKIE['sesion'])){
-            require_once("funciones.php");
-            list($usu,$nom)=comprobar_sesion();
-            if($usu==='a'){
-                $conexion=conectarservidor();
-                $cabecera=imprimir_menu($usu,$nom);
-                echo $cabecera;
-                echo "<h1>INSERTAR PRODUCTO</h1>";
-                echo btn_volver('Productos.php','volverinser');
-                $num=obtener_id("'producto'");
-                echo "<form class='formsinsertmod' method='post' action='#' enctype='multipart/form-data'>
-                    <div class='fila1'>
-                        <label for='idprod'>ID:</label>
-                        <input name='idprod' value=$num disabled type='number'>
-                    </div>
-                    <div class='fila1'>
-                        <label for='nomprod'>Nombre:</label>
-                        <input type='text' name='nomprod'>
-                    </div>
-                    <div class='fila1'>
-                        <label for='precprod'>Precio:</label>
-                        <input type='number' step=.01 name='precprod'>
-                    </div>
-                    <input type='submit' name='inserprod'>
-                </form>";
+    require_once("funciones.php");
+    session_start();
+    if(isset($_COOKIE['sesion'])){
+        list($usu,$nom)=comprobar_sesion('c');
+    }else if(isset($_SESSION['tipo'])){
+        list($usu,$nom)=comprobar_sesion('s');
+    }else{
+        $usu='n';
+        echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+        echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
+    }
+    if($usu==='a'){
+        $conexion=conectarservidor();
+        $cabecera=imprimir_menu($usu,$nom);
+        echo $cabecera;
+        echo "<h1>INSERTAR PRODUCTO</h1>";
+        echo btn_volver('Productos.php','volverinser');
+        $num=obtener_id("'producto'");
+        echo "<form class='formsinsertmod' method='post' action='#' enctype='multipart/form-data'>
+            <div class='fila1'>
+                <label for='idprod'>ID:</label>
+                <input name='idprod' value=$num disabled type='number'>
+            </div>
+            <div class='fila1'>
+                <label for='nomprod'>Nombre:</label>
+                <input type='text' name='nomprod'>
+            </div>
+            <div class='fila1'>
+                <label for='precprod'>Precio:</label>
+                <input type='number' step=.01 name='precprod'>
+            </div>
+            <input type='submit' name='inserprod'>
+        </form>";
 
-                if(isset($_POST['inserprod'])){
-                    $id='';
-                    $nom=$_POST['nomprod'];
-                    $pre=$_POST['precprod'];
-                    if($nom==='' || $pre<=0){
-                        echo "<p class='mnsmod'>Datos incorrectos</p>";
-                    }else{
-                    // Compruebo si han insertado un precio con ',' porque en la base de datos se guarda con '.' y daría fallo
-                        if(preg_match("`,`",$pre)){
-                            $pre=str_replace(",",".",$pre);
-                        }
-                        $inser=$conexion->prepare("insert into producto values(?,?,?)");
-                        $inser->bind_param("isd",$id,$nom,$pre);
-                        $inser->execute();
-                        $inser->close();
-                        $inser="<p class='mnsmod'>Datos insertados correctamente</p>";
-                        echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=Productos.php'>";
-            
-                        echo $inser;
-                    }
-                }
-
-                $conexion->close();
+        if(isset($_POST['inserprod'])){
+            $id='';
+            $nom=$_POST['nomprod'];
+            $pre=$_POST['precprod'];
+            if($nom==='' || $pre<=0){
+                echo "<p class='mnsmod'>Datos incorrectos</p>";
             }else{
-                echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=../index.php'>";
+            // Compruebo si han insertado un precio con ',' porque en la base de datos se guarda con '.' y daría fallo
+                if(preg_match("`,`",$pre)){
+                    $pre=str_replace(",",".",$pre);
+                }
+                $inser=$conexion->prepare("insert into producto values(?,?,?)");
+                $inser->bind_param("isd",$id,$nom,$pre);
+                $inser->execute();
+                $inser->close();
+                $inser="<p class='mnsmod'>Datos insertados correctamente</p>";
+                echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=Productos.php'>";
+    
+                echo $inser;
             }
-        }else{
-            echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=../index.php'>";
         }
+
+        $conexion->close();
+    }else{
+        echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+        echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
+    }
         
     ?>
 </body>

@@ -17,7 +17,14 @@
         $conexion=conectarservidor();
         echo imprimir_menu('n','');
         if(isset($_GET['cerrar'])){
-            setcookie("sesion",null,-444444,'/');
+            session_start();
+            if(isset($_COOKIE['sesion'])){
+                setcookie("sesion",null,-444444,'/');
+                session_destroy();
+            }else if(isset($_SESSION['tipo'])){
+                session_destroy();
+            }
+            
             echo "<p class='mnsmod'>Cerrando Sesión</p>";
             echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=formacceso.php'>";
 
@@ -55,14 +62,14 @@
                             $_SESSION['usuario']=$nomusu;
                             if($nomusu==='admin'){
                                 $_SESSION['tipo']='a';
+                                $_SESSION['usuario']='Administrador';
                             }else{
                                 $_SESSION['tipo']='s';
                             }
-                            $datos=session_encode();
+                            
                             if(isset($_POST['mantener'])){
+                                $datos=session_encode();
                                 setcookie("sesion",$datos,strtotime('+3days'),'/');
-                            }else{
-                                setcookie("sesion",$datos,'','/');
                             }
                             echo "<p class='mnsmod'>¡Bienvenido!</p>";
                             echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=../index.php'>";

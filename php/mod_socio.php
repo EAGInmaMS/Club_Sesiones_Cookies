@@ -14,11 +14,24 @@
 </head>
 <body>
     <?php
+    require_once("funciones.php");
+    session_start();
     if(isset($_COOKIE['sesion'])){
-        require_once("funciones.php");
-        list($usu,$nom)=comprobar_sesion();
+        list($usu,$nom)=comprobar_sesion('c');
+        $permiso=true;
+    }else if(isset($_SESSION['tipo'])){
+        list($usu,$nom)=comprobar_sesion('s');
+        $permiso=true;
+    }else{
+        $usu='n';
+        $permiso=false;
+        echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+        echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
+    }
+
+    if($permiso){
+        $conexion=conectarservidor();
         if($usu==='a'){
-            $conexion=conectarservidor();
             $cabecera=imprimir_menu($usu,$nom);
             echo $cabecera;
             echo "<h1>EDITAR DATOS</h1>";
@@ -70,6 +83,7 @@
             }
         }else{
             echo "<h1>EDITAR DATOS</h1>";
+            echo btn_volver('datos_socio.php','volverinser');
             $idsocio=$conexion->prepare("select id from socio where usuario=?");
             $idsocio->bind_param("s",$nom);
             $idsocio->bind_result($id);
@@ -129,6 +143,11 @@
 
         if(isset($_POST['modenviar'])){
             // compruebo que el teléfono introducido es un teléfono válido
+            if($usu==='a'){
+                $nuevonom=$_POST['modnom'];
+                $nuevaedad=$_POST['modedad'];
+                $nuevousu=$_POST['modusu'];
+            }
             $nuevotlf=$_POST['modtelf'];
             $comprobacion="`^(6|7)[0-9]{8}$`";
             if(preg_match($comprobacion,$nuevotlf)|| $nuevotlf==='0'){
@@ -146,11 +165,15 @@
                         $ruta="../img/$nomfoto";
                         move_uploaded_file($temp,$ruta);
                         $modificar=$conexion->prepare("update socio set Nombre=?,Edad=?,Usuario=?,Pass=?,Telefono=?,Foto=? where Id=?");
-                        $modificar->bind_param("sissisi",$nuevonom,$nuevaedad,$nuevousu,$nuevapass,$nuevotlf,$ruta,$idsocio);
+                        $modificar->bind_param("sissssi",$nuevonom,$nuevaedad,$nuevousu,$nuevapass,$nuevotlf,$ruta,$id);
                         $modificar->execute();
                         $modificar->close();
                         echo "<p class='mnsmod'>datos actualizados con éxito</p>";
-                        echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=socios.php'>";
+                        if($usu=='a'){
+                            echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=socios.php'>";
+                        }else{
+                            echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=datos_socio.php'>";
+                        }
                     }else{
                         echo"<p class='mnsmod'>Foto no válida</p>";
                     }
@@ -160,16 +183,21 @@
                     $modificar->execute();
                     $modificar->close();
                     echo "<p class='mnsmod'>datos actualizados con éxito</p>";
-                    //echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=socios.php'>";
+                    if($usu=='a'){
+                        echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=socios.php'>";
+                    }else{
+                        echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=datos_socio.php'>";
+                    }
+                    
                 }
                 
             }else{
                 echo "<p class='mnsmod'>telefono no válido</p>";
             }
-        }       
-        
-        }else{
-        echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=../index.php'>";
+        }
+        $conexion->close();
+    }else{
+        echo "<META HTTP-EQUIV='REFRESH'CONTENT='1;URL=../index.php'>";
     }
 
     

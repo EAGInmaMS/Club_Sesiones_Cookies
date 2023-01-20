@@ -14,44 +14,60 @@
 <body id='bodytesti'>
     <?php
         require_once("funciones.php");
-        echo imprimir_menu();
-        $conexion=conectarservidor();
-        echo "<main id='maintesti'>";
-        echo "<h1>TESTIMONIOS DE NUESTROS CLIENTES</h1>";
-        echo "<div class='inser'>";
-        echo btn_inser('inser_test.php','TESTIMONIO');
-        echo "</div>";
-        
-        $consulta="select * from testimonio order by fecha desc";
-        $datos_consul=$conexion->query($consulta);
-        if($datos_consul->num_rows==0){
-            echo "<p>No hay datos que coincidan con su consulta</p>";
+        session_start();
+        if(isset($_COOKIE['sesion'])){
+            list($usu,$nom)=comprobar_sesion('c');
+        }else if(isset($_SESSION['tipo'])){
+            list($usu,$nom)=comprobar_sesion('s');
         }else{
-            $info=$datos_consul;
-            $info_test="<section id='datostesti'>";
-            while($cont=$info->fetch_array(MYSQLI_ASSOC)){
-                $info_test.="<article>";
-                $info_test.="<div id='autorfecha'>";
-                $autor=$cont['Autor'];
-                $consulta="select nombre from socio where id=".$autor;
-                $nombre_socio=$conexion->query($consulta);
-                while($nom=$nombre_socio->fetch_array(MYSQLI_ASSOC)){
-                    $info_test.="<p>$nom[nombre]</p>";
-                }
-                $fechac=convertir_fecha($cont['Fecha']);
-                $info_test.="<p>$fechac</p>";
-                $info_test.="</div>";
-                $info_test.="<p>$cont[Contenido]</p>";
-
-                $info_test.="</article>";
-                
-            }
-            $info_test.="</section>";
-            echo $info_test;
+            $usu='n';
+            echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+            echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
         }
-        echo "</main>";
-        $conexion->close();
-        echo imprimir_footer();
+        if($usu==='a'){
+            echo imprimir_menu($usu,$nom);
+            $conexion=conectarservidor();
+            echo "<main id='maintesti'>";
+            echo "<h1>TESTIMONIOS DE NUESTROS CLIENTES</h1>";
+            echo "<div class='inser'>";
+            echo btn_inser('inser_test.php','TESTIMONIO');
+            echo "</div>";
+            
+            $consulta="select * from testimonio order by fecha desc";
+            $datos_consul=$conexion->query($consulta);
+            if($datos_consul->num_rows==0){
+                echo "<p>No hay datos que coincidan con su consulta</p>";
+            }else{
+                $info=$datos_consul;
+                $info_test="<section id='datostesti'>";
+                while($cont=$info->fetch_array(MYSQLI_ASSOC)){
+                    $info_test.="<article>";
+                    $info_test.="<div id='autorfecha'>";
+                    $autor=$cont['Autor'];
+                    $consulta="select nombre from socio where id=".$autor;
+                    $nombre_socio=$conexion->query($consulta);
+                    while($nom=$nombre_socio->fetch_array(MYSQLI_ASSOC)){
+                        $info_test.="<p>$nom[nombre]</p>";
+                    }
+                    $fechac=convertir_fecha($cont['Fecha']);
+                    $info_test.="<p>$fechac</p>";
+                    $info_test.="</div>";
+                    $info_test.="<p>$cont[Contenido]</p>";
+
+                    $info_test.="</article>";
+                    
+                }
+                $info_test.="</section>";
+                echo $info_test;
+            }
+            echo "</main>";
+            $conexion->close();
+            echo imprimir_footer();
+        }else{
+            echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
+            echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
+        }
+        
 
     ?>
 </body>

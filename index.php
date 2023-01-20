@@ -16,13 +16,9 @@
         require_once("php/funciones.php");
         session_start();
         if(isset($_COOKIE['sesion'])){
-            session_decode($_COOKIE['sesion']);
-            $usu=$_SESSION['tipo'];
-            if($usu==='a'){
-                $nom='Administrador';
-            }else{
-                $nom=$_SESSION['usuario'];
-            }
+            list($usu,$nom)=comprobar_sesion('c');
+        }elseif(isset($_SESSION['tipo'])){
+            list($usu,$nom)=comprobar_sesion('s');
         }else{
             $usu='n';
             $nom='';
