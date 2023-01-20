@@ -1,0 +1,160 @@
+body{
+    margin: 0px;
+}
+
+header{
+    position: sticky;
+    top:0px;
+    background-color: white;
+}
+
+header>nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem;
+}
+
+nav a{
+    text-decoration: none;
+    color:black;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+h1,h2{
+    text-align: center;
+    color:#38c48c;
+    font-family: 'Poppins', sans-serif;
+}
+
+hr{
+    width: 90%;
+    border: 0; 
+    height: 2px; 
+    text-align: center; 
+    background: linear-gradient(to left, #000000, #38c48c, #000000);
+}
+
+#nemesis{
+    width: 100%;
+    height: 90vh;
+    text-align: center;
+    margin: 2rem 0rem;
+}
+
+#nemesis div{
+    width: 100%;
+    height: 90%;
+}
+
+#nemesis a, #venom a{
+    text-decoration: none;
+    color: #38c48c;
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: x-large;
+    margin-top: 0.5rem;
+}
+
+#nemesis a:hover, #venom a:hover{
+    text-decoration: underline;
+    text-decoration-color: black;
+}
+
+#venom{
+    margin: 2rem 0rem;
+    text-align: center;
+}
+
+#imgvenom{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#parrafocontenido{
+    text-align: center;
+    font-size: x-large;
+    color: #38c48c;
+    font-family: 'Nunito', sans-serif;
+    margin: 2rem 0rem;
+}
+
+#dosprods{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2rem auto;
+    width: 95%;
+}
+
+#dosprods div{
+    width: 48%;
+    height: 45vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: larger;
+    font-weight: bold;
+    padding: 1rem;
+}
+
+#dosprods a{
+    text-decoration: none;
+    color: #fff;
+    border: 2px solid black;
+    padding: 0.5rem;
+    background-color: #38c48c;
+    font-family: 'Poppins', sans-serif;
+}
+
+#isaac{
+    background-image: url(../img/issac-tears-1_1080x.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+#isaac div,#crans div{
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+}
+
+#crans{
+    background-image: url(../img/crans-1_1080x.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+#dosprods a:hover{
+    text-decoration: underline;
+    text-decoration-color: black;
+}
+
+footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #38c48c;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    height: 10vh;
+}
+
+footer a{
+    color: white;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+footer a:hover{
+    text-decoration: underline;
+    text-decoration-color: #fff;
+}

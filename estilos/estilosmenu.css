@@ -1,0 +1,776 @@
+html{
+    min-height: 100vh;
+    position: relative;
+}
+
+body{
+    margin:0px;
+    margin-bottom: 8rem;
+}
+
+header{
+    position: sticky;
+    top:0px;
+    background-color: white;
+    
+}
+
+header>nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 3px solid #38c48c;
+}
+
+nav a{
+    text-decoration: none;
+    color:black;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+h1,h2{
+    text-align: center;
+    color:#38c48c;
+    font-family: 'Poppins', sans-serif;
+}
+
+.buscarinser{
+    width: 50%;
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buscarinser a{
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: larger;
+}
+
+.buscarinser input[type='text']{
+    color: #fff;
+    border: 0px;
+    border-bottom: 1px solid #38c48c ;
+    background-color: #00000000;
+    outline: none;
+    padding: 0.5rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+.buscarinser input[type='submit']{
+    font-family: 'Poppins', sans-serif;
+    background-color: #38c48c;
+    padding: 0.3rem;
+
+}
+
+.moddatos{
+    width: 30%;
+    margin:0.5rem auto;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.moddatos a{
+    color: #38c48c;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+}
+
+.datossocio{
+    display: flex;
+    flex-direction: column;
+    width: 36%;
+    margin: 1rem auto;
+    border: 5px solid #38c48c;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+.datossocio>:last-child{
+    width: 25%;
+    margin: 0.5rem auto;
+    text-align: center;
+}
+
+.datossocio p{
+    font-family: 'Nunito', sans-serif;
+}
+
+.datosocio p>:first-child{
+    text-decoration: underline;
+}
+
+.datossocio>:first-child{
+    margin-top: 1rem;
+}
+
+.inser{
+    width: 50%;
+    margin: 0.5rem auto;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.inser a{
+    color: black;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+#imgcabe{
+    background-image: url(../img/bg_home-1649843521986.webp);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+#contenidocabe{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 4rem 0rem;
+    max-height: 100%;
+    padding: 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: larger;
+}
+
+#contenidocabe>h1{
+    font-family: 'Poppins', sans-serif;
+    font-size: larger;
+    color: white;
+    text-align: left;
+}
+
+#ultimahora{
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 0rem;
+    background-color: black;
+    
+}
+
+#ultimahora>div{
+    display: flex;
+    justify-content: space-around;
+    height: 50%;
+    color: white;
+    padding: 2rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+#ultimahora>div>article{
+    width: 25%;
+    text-align: center;
+    margin: 1rem;
+    padding: 1.5rem;
+    border: 3px solid #38c48c;
+    border-radius: 10px;
+}
+
+#ultimahora h3{
+    font-family: 'Poppins', sans-serif;
+    color: #38c48c;
+}
+
+#ultimahora img{
+    max-height: 200px;
+}
+
+#ultimahora a{
+    color: aquamarine;
+    text-decoration: none;
+}
+
+#newprod{
+    background-image: url(../img/gummyfish1-1-190kb_1400x.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 40vh;
+    margin: 3rem 0rem;
+}
+
+#newprod>div{
+    text-align: center;
+    background-color: rgba(00, 00, 00, 0.55);
+    padding: 2rem;
+    height: 83.5%;
+    
+}
+
+#newprod p{
+    font-size: x-large;
+    margin: 3rem 0rem;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    
+}
+
+#newprod a{
+    font-size: x-large;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    text-decoration: none;
+    color: #38c48c;
+}
+
+#notesti{
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+#testimonios{
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 0rem;
+    background-image: url(../img/bgwhite-1636478857275.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 22vh;
+    font-family: 'Nunito', sans-serif;
+}
+
+#nomsocio{
+    font-family: 'Poppins', sans-serif;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#testimonios>div{
+    width: 50%;
+    margin: 0rem auto;
+    text-align: center;
+}
+
+#contacto{
+    margin: 3rem 0rem;
+}
+
+#contacto form{
+    width: 50%;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.fila{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
+
+.fila input{
+    width: 45%;
+    height: 2rem;
+}
+
+.mensaje{
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.mensaje textarea{
+    width: 95%;
+    font-family: 'Nunito', sans-serif;
+}
+
+#condiciones{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 2rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+#contacto input{
+    font-family: 'Nunito', sans-serif;
+}
+
+#contacto input[type='submit']{
+    width: 65%;
+    background-color: #38c48c;
+    height: 3rem;
+    margin-top: 1rem;
+    border: 0px;
+    font-family: 'Poppins', sans-serif;
+}
+#bodysocios{
+    background-color: rgba(00, 00, 00, 0.87);
+    color: #fff;
+}
+
+main{
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+#mainsocios>p{
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+#volver{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+#volver a{
+    color: white;
+    text-decoration: none;
+}
+
+#volverinser{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+#volverinser a{
+    color: black;
+    text-decoration: none;
+}
+
+.socio{
+    width: 65%;
+    margin: 2rem auto;
+}
+
+.socio article{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+.socio a{
+    color: #38c48c;
+    text-decoration: none;
+}
+
+.socio hr{
+    width: 90%;
+    border: 0; 
+    height: 2px; 
+    text-align: center; 
+    background: linear-gradient(to left, #fff, #38c48c, #fff);
+}
+
+.socio hr:last-child{
+    display: none;
+}
+
+.socio img{
+    max-width: 400px
+}
+
+#socioimg{
+    width: 50%;
+    text-align: center;
+}
+
+#sociodatos{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.5rem 0rem;
+}
+
+.formsinsertmod{
+    border: 3px solid #38c48c;
+    border-radius: 5px;
+    width: 50%;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.centrar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.fila1{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.columna1{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.columna1 div, .columna2 div{
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem;
+}
+
+.columna2{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.formsinsertmod div{
+    padding: 0.5rem;
+    font-family: 'Poppins', sans-serif; 
+}
+
+.check{
+    font-size: small;
+    margin-top: 0.5rem;
+}
+
+.formsinsertmod label{
+    font-family: 'Poppins', sans-serif;
+    margin-right: 0.3rem;
+}
+
+.formsinsertmod input{
+    border: 0px;
+    border-bottom: 1px solid #38c48c ;
+    background-color: #00000000;
+    outline: none;
+    font-family: 'Nunito', sans-serif;
+}
+
+.formsinsertmod input[type='file']{
+    border: 0px;
+}
+
+.formsinsertmod input[type='submit']{
+    width: 65%;
+    background-color: #38c48c;
+    height: 2.5rem;
+    border: 0px;
+    margin: auto;
+    margin-top: 1rem;
+    font-family: 'Poppins', sans-serif;   
+}
+
+.formsinsertmod select{
+    font-family: 'Nunito', sans-serif;
+}
+
+.formsinsertmod img{
+    max-width: 50%;
+}
+
+.mnsmod{
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+.bodyprodserv{
+    background-color: rgba(00, 00, 00, 0.87);
+    color: #fff;
+}
+
+.mainprodserv>p{
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+.tablaprodserv{
+    width: 65%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    text-align: center;
+    
+}
+
+.tablaprodserv td,.tablaprodserv th{
+    border: 3px solid #38c48c;
+    padding: 0.5rem;
+    
+}
+
+.tablaprodserv th{
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+.tablaprodserv td{
+    font-family: 'Nunito', sans-serif;
+}
+
+.tablaprodserv a{
+    color: rgba(56, 196, 140, 0.65);
+    text-decoration: none;
+}
+
+#bodytesti{
+    background-image: url(../img/bgwhite-1636478857275.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#maintesti>p{
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: large;
+    color: black;
+}
+
+#datostesti{
+    display: flex;
+    flex-direction: column;
+}
+
+#datostesti>article{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 2rem auto;
+    text-align: center;
+    border: 8px solid #38c48c;
+    border-radius: 10px;
+    padding: 1rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+#datostesti>article>div{
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Poppins', sans-serif;
+}
+
+#datostesti>article>div>p:first-child{
+    text-decoration: underline;
+}
+
+#autorfecha{
+    display: flex;
+    justify-content: space-around;
+}
+
+#contenidotestimonio{
+    height: 6rem;
+}
+
+#contenidonoti{
+    background-image: url(../img/news-newspapers-ss-1920.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#mainnoti>p{
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: large;
+    color: black;
+}
+
+#contnoticias{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 65%;
+    justify-content: center;
+    
+}
+
+#contnoticias>article{
+    display: flex;
+    width: 40%;
+    padding: 1rem;
+    flex-direction: column;
+    border: 7px solid #38c48c;
+    border-radius: 2%;
+    margin: 1.5rem;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    word-wrap: break-word;
+    background-color: rgba(00, 00, 00, 0.35);
+    color: #fff;
+}
+
+#contnoticias a{
+    text-decoration: none;
+    color: #38c48c;
+}
+
+#contnoticias p:first-child{
+    font-weight: bold;
+    font-size: large;
+    color: #38c48c;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: underline;
+}
+
+#contnoticias p:nth-child(2){
+    font-size: smaller;
+    font-family: 'Nunito', sans-serif;
+}
+
+#contnoticias img{
+    max-width: 300px;
+    max-height: 300px;
+    margin: auto;
+}
+
+#pagnoti{
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: large;
+    color: black;
+}
+
+.listapags{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28%;
+    margin: 1rem auto;
+    padding: 0px;
+}
+
+.listapags a{
+    text-decoration: none;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    padding: 0.5rem;
+}
+
+.listapags a:hover{
+    text-decoration: underline;
+    text-decoration-color: #38c48c;
+}
+
+#noticompleta img{
+    display: block;
+    height: 30rem;
+    width: 60%;
+    margin: 1rem auto;
+    object-fit: contain;
+}
+
+#noticompleta pre{
+    color: #38c48c;
+}
+
+#fechnoti,#completa{
+    width: 60%;
+    margin: auto;
+    font-family: 'Nunito', sans-serif;
+}
+
+#maincita>p{
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+#calendario{
+    border: 7px solid #38c48c;
+    width: 70%;
+    margin: 1rem auto;
+    text-align: center;
+    border-collapse: collapse;
+    background-color: #F8F6F0;
+}
+#calendario th{
+    font-family: 'Poppins', sans-serif;
+}
+
+#calendario td{
+    font-family: 'Nunito', sans-serif;
+}
+
+#calendario td, #calendario th{
+    border-collapse: collapse;
+    padding: 1.5rem;
+    color: black;
+}
+
+#calendario th a{
+    text-decoration: none;
+    color: #38c48c;
+    text-align: center;
+}
+
+#calendario tr:first-child{
+    font-weight: bold;
+}
+
+.cita{
+    background-color: aquamarine;
+}
+
+.cita a{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+
+footer{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #38c48c;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    height: 10vh;
+}
+
+footer a{
+    color: white;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+footer a:hover{
+    text-decoration-color: #fff;
+}
+
+#newprod a:hover,#contnoticias a:hover,#ultimahora a:hover,.tablaprodserv a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: white;
+}
+
+a:hover, #volver a:hover, #volverinser a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: #38c48c;
+}
