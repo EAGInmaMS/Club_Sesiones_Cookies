@@ -88,9 +88,6 @@
                 echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=citas.php'>";
             }
         }
-    }else{
-        echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
-        echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
     }
         
         

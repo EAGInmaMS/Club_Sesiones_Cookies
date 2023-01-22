@@ -88,9 +88,6 @@
                 }
                 echo"</main>";
                 echo imprimir_footer();
-        }else{
-            echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
-            echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
         }
         
         
