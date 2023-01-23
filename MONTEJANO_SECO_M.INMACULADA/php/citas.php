@@ -52,7 +52,12 @@
                     $mes=12;
                 }
                 $n_mes=nom_mes($mes);
-                echo calendario($mes,$n_mes,$anio,$usu,$id_socio);
+                if($usu==='s'){
+                    echo calendario($mes,$n_mes,$anio,$usu,$id_socio);
+                }else{
+                    echo calendario($mes,$n_mes,$anio,$usu,'');
+                }
+                
             }else if(isset($_GET['mespost'])){
                 $mes=$_GET['mespost']+1;
                 $anio=$_GET['anio'];
@@ -61,12 +66,21 @@
                     $mes=1;
                 }
                 $n_mes=nom_mes($mes);
-                echo calendario($mes,$n_mes,$anio,$usu,$id_socio);
+                if($usu==='s'){
+                    echo calendario($mes,$n_mes,$anio,$usu,$id_socio);
+                }else{
+                    echo calendario($mes,$n_mes,$anio,$usu,'');
+                }
             }else{
                 $mes=date("n");
                 $anio=date("Y");
                 $nombre_mes=nom_mes($mes);
-                echo calendario($mes,$nombre_mes,$anio,$usu,$id_socio);
+                $n_mes=nom_mes($mes);
+                if($usu==='s'){
+                    echo calendario($mes,$n_mes,$anio,$usu,$id_socio);
+                }else{
+                    echo calendario($mes,$n_mes,$anio,$usu,'');
+                }
             }
             
             if($usu==='a'){

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2022 a las 17:23:08
+-- Tiempo de generación: 23-01-2023 a las 08:50:11
 -- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,15 +39,9 @@ CREATE TABLE `citas` (
 --
 
 INSERT INTO `citas` (`socio`, `servicio`, `fecha`, `hora`) VALUES
-(1, 1, '2022-11-13', '13:49:00'),
-(2, 1, '2022-11-13', '13:49:00'),
-(3, 2, '2022-11-30', '14:48:00'),
-(4, 2, '2022-10-20', '11:48:00'),
-(4, 2, '2022-11-21', '14:20:00'),
-(9, 2, '2022-11-21', '11:06:00'),
-(12, 1, '2021-11-30', '16:09:00'),
-(12, 3, '2022-10-12', '12:12:00'),
-(12, 3, '2023-01-27', '19:21:00');
+(30, 8, '2023-01-27', '16:40:00'),
+(30, 9, '2023-02-16', '10:27:00'),
+(35, 9, '2023-01-18', '11:27:00');
 
 -- --------------------------------------------------------
 
@@ -68,12 +62,10 @@ CREATE TABLE `noticia` (
 --
 
 INSERT INTO `noticia` (`Id`, `Titulo`, `Contenido`, `Imagen`, `Fecha_publicacion`) VALUES
-(15, 'jajajaj jalloweeen ', 'jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen ', '../img/fondo.png', '2022-11-09'),
-(16, 'jajajaj jalloweeen ', 'jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen ', '../img/descarga.jpg', '2022-12-30'),
-(23, 'jajajaj jalloweeen ', 'jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen jajajaj jalloweeen ', '../img/gestion-de-gimnasios.jpg', '2022-11-08'),
-(24, 'koi ', 'koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi koi ', '../img/koi-780x470.webp', '2023-01-27'),
-(25, 'Miercoles', 'LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie ', '../img/3.jpg', '2022-12-14'),
-(27, 'Miercoles', 'LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie LA mejor serie ', '../img/1.jpg', '2022-12-14');
+(28, 'Para la vuelta al \'gym\', toma nota', 'Enero está lleno de propósitos y uno de los más repetidos por todo el mundo es apuntarse al gimnasio. Si ya has pasado el umbral de pagar la matrícula, comprarte el material y abonar la primera mensualidad, hay algo importante en lo que, quizá, no has reparado: el candado para la taquilla. Hay gimnasios en los que este artículo se proporciona y los modelos que dan son numéricos y seguros, pero, hay otros establecimientos donde es obligatorio que cada persona lleve un candado de casa por seguridad. Si este último es tu caso, igual te preguntas: ¿cuáles son los candados más seguros para una taquilla? Desde 20deCompras hemos señalado una lista de características que deben tener los candados para que sean seguros y cómodos para un gimnasio, así como varias opciones por si todavía no tienes uno.', '../img/candado-taquilla-numerico-pixabay.jpeg', '2023-01-17'),
+(29, 'La seleccionadora italiana de rítmica, a juicio', 'La histórica seleccionadora italiana de gimnasia femenina, Emanuela Maccarani, que lleva al frente del equipo casi 27 años; y su ayudante, Olga Tishina, serán juzgadas por la justicia deportiva por someter a vejaciones y malos tratos psicológicos a las integrantes del equipo nacional que entrenaban bajo sus órdenes.\r\n\r\nLas entrenadoras recibieron este miércoles la notificación en las que se las comunicaba que serán llevadas a juicio tras las investigaciones llevadas a cabo por la Fiscalía de la Federación de Gimnasia de Italia (FGI).', '../img/el-equipo-italiano-en-los-jjoo-de-tokio-2020.jpeg', '2023-01-27'),
+(31, '10 regalos de Navidad para amantes del fitness', 'Si estás buscado el regalo perfecto para un apasionado/a del deporte hay muchas ideas más allá de la ropa de entrenamiento o equipación para el gimnasio.\r\n\r\nEn Myprotein tienen un amplio catálogo con el que inspirarte y, además, puedes beneficiarte de un ahorro extra del 42% gracias a nuestro código descuento MyProtein exclusivo.', '../img/fotonoticia.jpeg', '2022-12-15'),
+(32, 'Anorexia... la pandemia que nadie quiere ver', 'Es probable que gran parte de las personas que lean este artículo puedan estar viviendo en primera persona, o en un familiar, o en un compañer@ de clase o de trabajo, lo que supone un Trastorno de Conducta Alimentaria (TCA)… ¡incluso muchos sin saberlo! \r\n\r\nPensamos en la anorexia y se nos vienen a la cabeza imágenes de adolescentes extremadamente delgadas, cuando en realidad ese es el último estadio al que se ven abocados los pacientes, siendo aún muy superior el número de mujeres que hombres, cuando ya la enfermedad ha atrapado absolutamente a la persona, su vida es ya un infierno, e incluso en muchos casos corre peligro. \r\n\r\n', '../img/bulimia-anorexia.jpeg', '2022-12-01');
 
 -- --------------------------------------------------------
 
@@ -92,8 +84,9 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`Id`, `Nombre`, `Precio`) VALUES
-(16, 'Nombre de cosa', '45.00'),
-(17, 'hOLA', '78.00');
+(18, 'Pesas', '45.00'),
+(19, 'Set Mancuernas', '67.00'),
+(20, 'Mancuernas 20Kg', '56.98');
 
 -- --------------------------------------------------------
 
@@ -113,9 +106,9 @@ CREATE TABLE `servicio` (
 --
 
 INSERT INTO `servicio` (`Id`, `Descripcion`, `Duracion`, `Precio`) VALUES
-(1, 'Masaje', 20, '20.17'),
-(2, 'Coasa', 78, '9.50'),
-(3, 'ñññññññ', 34, '34.00');
+(6, 'Entrenamiento', 45, '45.00'),
+(8, 'Masaje de espalda', 67, '90.00'),
+(9, 'Piscina', 34, '20.78');
 
 -- --------------------------------------------------------
 
@@ -125,27 +118,22 @@ INSERT INTO `servicio` (`Id`, `Descripcion`, `Duracion`, `Precio`) VALUES
 
 CREATE TABLE `socio` (
   `Id` bigint(20) NOT NULL,
-  `Nombre` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+  `Nombre` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   `Edad` tinyint(2) NOT NULL,
-  `Usuario` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
-  `Pass` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
-  `Telefono` int(9) NOT NULL,
-  `Foto` varchar(100) COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `Usuario` varchar(30) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `Pass` varchar(80) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `Telefono` varchar(9) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `Foto` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `socio`
 --
 
 INSERT INTO `socio` (`Id`, `Nombre`, `Edad`, `Usuario`, `Pass`, `Telefono`, `Foto`) VALUES
-(1, 'sdvfsd', 35, 'wgaerg', 'gdefgrfg', 660258258, '../img/rosalia-1663923566.jpg'),
-(2, 'prueba2', 34, 'gvraeg', 'sdgdfg', 660000000, '../img/descarga.jpg'),
-(3, 'prueba3', 34, 'gvraegh', 'dgbnfxvghm', 698752364, '../img/descarga.jpg'),
-(4, 'rgvdfvg', 0, '', '', 655555555, '../img/descarga.jpg'),
-(9, 'rdthrt', 85, 'rtdhrth', 'rtdhtrfyh', 666666999, '../img/rubi.jpeg'),
-(11, 'prueba22', 34, '45rsdvf', 'sdfsdf', 666999881, '../img/FT1tVkWWQAATRno.jpg'),
-(12, 'Antonio', 67, 'degvbderfbdr', '348753', 786543219, '../img/fondo.png'),
-(13, 'fdzghdfzhfgxh', 56, 'fgdshfdhg', 'dfbfxbgnxg', 614748364, '../img/kojima-780x470.jpg');
+(0, 'Administrador', 0, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', '', ''),
+(30, 'Antonio', 18, 'toño2001', '06aa6cff19411c58bcc4a43508f03f5f', '698741238', '../img/fotoperfil.webp'),
+(35, 'Alba', 23, 'meieff', 'a6181340338ed9d68a2edab60b004525', '678534215', '../img/8081307-foto-genérica-de-una-mujer-casualmente-vestido-con-una-camisa-azul-y-blue-jeans-.webp');
 
 -- --------------------------------------------------------
 
@@ -165,8 +153,8 @@ CREATE TABLE `testimonio` (
 --
 
 INSERT INTO `testimonio` (`Id`, `Autor`, `Contenido`, `Fecha`) VALUES
-(17, 12, 'Que divertido Hayowin', '2022-11-01'),
-(18, 2, 'Vaya puto asco Jayowin', '2022-11-08');
+(19, 30, 'El mejor gimnasio en el que he estado sin duda', '2023-01-19'),
+(21, 35, 'La piscina es enorme!', '2023-01-23');
 
 --
 -- Índices para tablas volcadas
@@ -218,31 +206,31 @@ ALTER TABLE `testimonio`
 -- AUTO_INCREMENT de la tabla `noticia`
 --
 ALTER TABLE `noticia`
-  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `servicio`
 --
 ALTER TABLE `servicio`
-  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `socio`
 --
 ALTER TABLE `socio`
-  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `testimonio`
 --
 ALTER TABLE `testimonio`
-  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas
