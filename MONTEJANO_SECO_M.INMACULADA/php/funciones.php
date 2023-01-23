@@ -184,7 +184,7 @@
             $conex->close();
         }
 
-        function calendario($mes,$nombre,$anio){
+        function calendario($mes,$nombre,$anio,$u,$i){
             if($mes<1 || $mes>12){
                 $calendario="<p>Fecha Incorrecta</p>";
             }else{
@@ -197,7 +197,12 @@
                 // Saco los días de ese mes que tienen alguna cita programada
                 $fmin=$anio."-".$mes."-01";
                 $fmax=$anio."-".$mes."-31";
-                $consulta="select * from citas where fecha>='".$fmin."' and fecha<='".$fmax."'";
+                if($u==='a'){
+                    $consulta="select * from citas where fecha>='".$fmin."' and fecha<='".$fmax."'";
+                }else if($u==='s'){
+                    $consulta="select * from citas where fecha>='".$fmin."' and fecha<='".$fmax."' and socio=".$i;
+                }
+                
                 $diascita=$conex->query($consulta);
                 // Y los meto en un array para que luego, cuando salgan por pantalla, el fondo sea de un color diferente
                 while($fila=$diascita->fetch_array(MYSQLI_ASSOC)){

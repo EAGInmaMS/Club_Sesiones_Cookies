@@ -32,7 +32,7 @@
             echo "<h1>INSERTAR NOTICIA</h1>";
             echo btn_volver('noticias.php','volverinser');
             $num=obtener_id("'noticia'");
-            echo "<form class='formsinsertmod' method='post' action='noticias.php' enctype='multipart/form-data'>
+            echo "<form class='formsinsertmod' method='post' action='#' enctype='multipart/form-data'>
                 <div class='fila1'>
                 <label for='titulo'>Titulo de la noticia:</label>
                 <input name='titulo' type='text'>
@@ -66,9 +66,10 @@
                     $insernoti->bind_param("issss",$id,$titulo,$contenido,$ruta,$fecha_publi);
                     $insernoti->execute();
                     $insernoti->close();
-                    echo "<p>datos insertados correctamente</p>";
+                    echo "<p class='mnsmod'>datos insertados correctamente</p>";
+                    echo "<META HTTP-EQUIV='REFRESH'CONTENT='3;URL=noticias.php'>";
                 }else{
-                    echo "<p>imagen no válida</p>";
+                    echo "<p class='mnsmod'>imagen no válida</p>";
                 }
             }
         }else if($usu==='s'){

@@ -33,6 +33,15 @@
             echo "<body class='bodyprodserv'>";
             echo imprimir_menu($usu,$nom);
             echo "<main id='maincita'> <h1>Citas</h1>";
+            if($usu==='s'){
+                $idcitas=$conexion->prepare("select id from socio where usuario=?");
+                $idcitas->bind_param("s",$nom);
+                $idcitas->bind_result($id_socio);
+                $idcitas->execute();
+                $idcitas->store_result();
+                $idcitas->fetch();
+                $idcitas->close();
+            }
             // Este if comprueba si se quiere ir hacia atrás o hacia adelante, en el caso de ir hacia atrás, comprueba si se cambia de año, para restar 1, y en el caso de
             // ir hacia delante, si se cambia de año para sumar 1
             if(isset($_GET['mesant'])){
@@ -43,7 +52,7 @@
                     $mes=12;
                 }
                 $n_mes=nom_mes($mes);
-                echo calendario($mes,$n_mes,$anio);
+                echo calendario($mes,$n_mes,$anio,$usu,$id_socio);
             }else if(isset($_GET['mespost'])){
                 $mes=$_GET['mespost']+1;
                 $anio=$_GET['anio'];
@@ -52,12 +61,12 @@
                     $mes=1;
                 }
                 $n_mes=nom_mes($mes);
-                echo calendario($mes,$n_mes,$anio);
+                echo calendario($mes,$n_mes,$anio,$usu,$id_socio);
             }else{
                 $mes=date("n");
                 $anio=date("Y");
                 $nombre_mes=nom_mes($mes);
-                echo calendario($mes,$nombre_mes,$anio);
+                echo calendario($mes,$nombre_mes,$anio,$usu,$id_socio);
             }
             
             if($usu==='a'){
