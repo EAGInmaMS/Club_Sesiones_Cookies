@@ -25,7 +25,10 @@
             echo "<META HTTP-EQUIV='REFRESH'CONTENT='4;URL=../index.php'>";
         }
         if($usu==='a'){
+            header('Content-Type:application/json');
+            header("Acces-Control-Allow-Origin: *");
             $conexion=conectarservidor();
+            $datos=[];
             echo imprimir_menu($usu,$nom);
             echo "<main id='mainnoti'>";
             echo "<h1>NOTICIAS</h1>";
@@ -34,14 +37,11 @@
             echo "</div>";
 
             // Primero establecemos el número de noticias que va a aparecer por página
+            sleep(1);
             $notispag=4;
-            $pagina=1;
-            if(isset($_GET["pagina"])){
-                $pagina=$_GET["pagina"];
-            }
-            // Establecemos el limit y el offset para después realizar la consulta
-            $limit=$notispag;
-            $offset=($pagina-1)*$notispag;
+            $limite=$_GET["limite"] ?? $notispag=4;;
+            $offset=$_GET["offset"] ?? 0;
+
             $totalpags=$conexion->query("select count(*) as conteo from noticia");
             // Y sacamos el número de noticias que hay en la base de datos
             while($num=$totalpags->fetch_array(MYSQLI_ASSOC)){
@@ -51,42 +51,32 @@
                 echo "<p>No hay ninguna noticia</p>";
             }else{
                 // Redondeamos para que salga el numero de páginas que van a aparecer
-                $pags=ceil($numnotis/$notispag);
-                $info=$conexion->prepare("select * from noticia order by fecha_publicacion desc limit ? offset ?");
-                $info->bind_param("ii",$limit,$offset);
-                $info->bind_result($id,$titulo,$contenido,$imagen,$fecha);
+                $info=$conexion->prepare("select * from noticia order by fecha_publicacion desc limit $offset, $limite");
                 $info->execute();
+                $resultado=$info->get_result();
                 echo "<div id='contenidonoti'>";
                 echo "<section id='contnoticias'>";
-                while($info->fetch()){
-                        $contenido=substr($contenido,0,100);
-                        echo "<article>";
-                        echo "<img src=\"$imagen\">";
-                        echo "<p>$titulo</p>";
-                        $fechac=convertir_fecha($fecha);
-                        echo "<p>$fechac</p>";
-                        echo "<p>$contenido</p>";
-                        echo "<a method='get' href='noti_completa.php?completa=$id'>VER MÁS</a>";
-
-                        echo "</article>";
+                while($fila=$resultado->fetch_assoc()){
+                        $datos[]=$fila;
                 }
-                $info->close();
+                
+                $patron_url=explode("?",$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"])[0];
+
                 echo "</section> </div>";
 
-                echo "<div id='pagnoti'><p>Página $pagina de $pags</p></div>";
+                echo "<a id='antes' href=''>ANTERIOR</a>";
+                echo "<a id='posterior' href=''>SIGUIENTE</a>";
+                echo"</main>";
 
-                echo "<ul class='listapags'>";
-                for($x=1;$x<=$pags;$x++){
-                    // Si la página es igual al valor de x le ponemos la clase 'active' al li para saber qué pagina estamos mostrando
-                    if($x==$pagina){
-                        echo "<li class='active'><a href='./noticias.php?pagina=$x'>$x</a></li>";
+                $nuevo_offset=$offset+$limite;
+                if($nuevo_offset<$numnotis){
+                    $sig_offset=$nuevo_offset;
+                    if($nuevo_offset$limite>$numnotis){
+                        $sig_limite=$numnotis-$nuevo_offset;
                     }else{
-                        echo "<li><a href='./noticias.php?pagina=$x'>$x</a></li>";
+                        $sig_limite=$limite;
                     }
                 }
-                echo "</ul>";
-                }
-                echo"</main>";
                 echo imprimir_footer();
         }else if($usu==='s'){
             echo "<p class='mnsmod'>No tiene permiso para acceder. Redirigiendo</p>";
