@@ -14,6 +14,7 @@
                         <a href='../index.php'><img src='../img/NUEVO_LOGO_verde_180x.avif'></a>
                         <a href='Productos.php'>Productos</a>
                         <a href='servicios.php'>Servicios</a>
+                        <a href='tiempo.php'>Tiempo</a>
                         <a href='formacceso.php'>Acceder</a>
                     </nav>
                 </header>";
@@ -27,7 +28,8 @@
                             $cabecera.="<a href='socios.php'>Socios</a>";
                         }
                         $cabecera.="<a href='Productos.php'>Productos</a>
-                        <a href='servicios.php'>Servicios</a>";
+                        <a href='servicios.php'>Servicios</a>
+                        <a href='tiempo.php'>Tiempo</a>";
                         if($u==='s'){
                             $cabecera.="<a href='citas.php'>Mis Citas</a>";
                         }else{
@@ -49,6 +51,7 @@
                         <a href='index.php'><img src='img/NUEVO_LOGO_verde_180x.avif'></a>
                         <a href='php/Productos.php'>Productos</a>
                         <a href='php/servicios.php'>Servicios</a>
+                        <a href='php/tiempo.php'>Tiempo</a>
                         <a href='php/formacceso.php'>Acceder</a>
                     </nav>
                 </header>";
@@ -62,7 +65,8 @@
                             $cabecera.="<a href='php/socios.php'>Socios</a>";
                         }
                         $cabecera.="<a href='php/Productos.php'>Productos</a>
-                        <a href='php/servicios.php'>Servicios</a>";
+                        <a href='php/servicios.php'>Servicios</a>
+                        <a href='php/tiempo.php'>Tiempo</a>";
                         if($u==='s'){
                             $cabecera.="<a href='php/citas.php'>Mis Citas</a>";
                         }else{

@@ -2,7 +2,7 @@
 
 let lista=[];
 
-const contenedor_noticias=document.getElementById("contnoticias");
+const contenedor_noticias=document.getElementById("contenidonoti");
 const pag_sig=document.getElementById("posterior");
 const pag_ant=document.getElementById("antes");
 
@@ -51,15 +51,27 @@ function renderizar(lista, contenedor_dom, creadorDom){
 
 function crearNoticia(n){
     const noti=document.createElement("article");
-    let fechanoticia=Date.parse(d.fecha);
+    let fechanoticia=Date.parse(n.Fecha_publicacion);
+    fechanoticia=new Date(fechanoticia);
     let dia=fechanoticia.getDate();
     let mes=fechanoticia.getMonth();
     let año=fechanoticia.getFullYear();
-    noti.innerHTML=`<article class="noti">
-    <div class='contenido_noticia' data-id=${n.id}>
-        <img src="${n.imagen}>
-        <p>${n.titulo}</p>
+    let cont=n.Contenido;
+    cont.substring(0,150);
+    noti.innerHTML=`<article class='noti'>
+    <div class='contenido_noticia'>
+        <img src='${n.Imagen}'>
+        <div>
+        <p>${n.Titulo}</p>
         <p>${dia}-${mes}-${año}</p>
+        </div>
+        <p>${cont}</p>
+        <a href='noti_completa.php?completa=${n.Id}'>VER MÁS</a>
     </div>
-    </article>`
+    </article>`;
+
+    return noti;
 }
+
+pag_sig.addEventListener("click",cambiarPagina);
+pag_ant.addEventListener("click",cambiarPagina);

@@ -37,7 +37,7 @@
             echo "<div id='contenidonoti'>";
             echo "<section id='contnoticias'>";   
 
-            echo "</section> </div>";
+            echo "</section></div>";
 
             echo "<a id='antes' href=''>ANTERIOR</a>";
             echo "<a id='posterior' href=''>SIGUIENTE</a>";
