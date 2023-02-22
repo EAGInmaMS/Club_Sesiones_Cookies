@@ -660,12 +660,12 @@ main{
     color: #fff;
 }
 
-#contnoticias a{
+#contenidonoti a{
     text-decoration: none;
     color: #38c48c;
 }
 
-#contnoticias p:first-child{
+#contenidonoti p:first-child{
     font-weight: bold;
     font-size: large;
     color: #38c48c;
@@ -673,15 +673,30 @@ main{
     text-decoration: underline;
 }
 
-#contnoticias p:nth-child(2){
+#contenidonoti p:nth-child(2){
     font-size: smaller;
     font-family: 'Nunito', sans-serif;
 }
 
-#contnoticias img{
+#contenidonoti img{
     max-width: 300px;
     max-height: 300px;
     margin: auto;
+}
+
+#antes,#posterior{
+    margin: 0.5rem auto;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+#antes:hover,#posterior:hover{
+    text-decoration: underline;
+    text-decoration-color: #38c48c;
 }
 
 #pagnoti{

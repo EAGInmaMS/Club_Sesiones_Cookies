@@ -24,7 +24,7 @@ async function Inicio(url_api="../php/noticiasLista.php"){
 
     if(datos["siguiente"]!=="null"){
         pag_sig.setAttribute("href","http://"+datos["siguiente"]);
-        pag_sig.style.display="inline";
+        pag_sig.style.display="block";
     }else{
         pag_sig.setAttribute("href","");
         pag_sig.style.display="none";
@@ -32,7 +32,7 @@ async function Inicio(url_api="../php/noticiasLista.php"){
 
     if(datos["anterior"]!=="null"){
         pag_ant.setAttribute("href","http://"+datos["anterior"]);
-        pag_ant.style.display="inline";
+        pag_ant.style.display="block";
     }else{
         pag_ant.setAttribute("href","");
         pag_ant.style.display="none";
@@ -52,12 +52,12 @@ function renderizar(lista, contenedor_dom, creadorDom){
 function crearNoticia(n){
     const noti=document.createElement("article");
     let fechanoticia=Date.parse(n.Fecha_publicacion);
+    console.log(fechanoticia);
     fechanoticia=new Date(fechanoticia);
+    console.log(fechanoticia);
     let dia=fechanoticia.getDate();
-    let mes=fechanoticia.getMonth();
+    let mes=fechanoticia.getMonth()+1;
     let año=fechanoticia.getFullYear();
-    let cont=n.Contenido;
-    cont.substring(0,150);
     noti.innerHTML=`<article class='noti'>
     <div class='contenido_noticia'>
         <img src='${n.Imagen}'>
@@ -65,7 +65,7 @@ function crearNoticia(n){
         <p>${n.Titulo}</p>
         <p>${dia}-${mes}-${año}</p>
         </div>
-        <p>${cont}</p>
+        <p>${n.Contenido.substring(0,100)}</p>
         <a href='noti_completa.php?completa=${n.Id}'>VER MÁS</a>
     </div>
     </article>`;
